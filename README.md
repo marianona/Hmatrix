@@ -1,4 +1,4 @@
 Hmatrix
 =======
 
-Hierarchical matrices in matlab.
+Hierarchical matrices in Matlab.
