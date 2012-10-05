@@ -136,7 +136,7 @@ classdef rkmatrix
         function RK = mtimes(a,b)
             if isa(a, 'rkmatrix') && isa(b, 'rkmatrix')
                 %if ((a.rows - b.cols) * a.kt * b.kt <= (a.kt - b.kt) * a.rows * b.cols)
-                % assuming m almost equal n
+                % assuming a.rows almost equal to b.cols
                 if (b.kt < a.kt)
                     RK = rkmatrix((a.a * (a.b' * b.a)) * b.b');
                 else
