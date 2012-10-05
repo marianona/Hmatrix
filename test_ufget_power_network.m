@@ -8,6 +8,7 @@ testloops = 1;
 minBlockSize = 256^2;
 relativeError = 0;
 showerror = 0;
+stopAfterNExceptions = 3; % stop after # in row exceptions.
 
 %% Matrices selected from UFgui:
 % Example usage:
@@ -80,7 +81,7 @@ ids = [
 2535 % IPSO/HTC_336_9129
 ] ;
 
-nstart = 1;
+nstart = 2;
 nend = length(ids);
         
 t1(nend) = 0;
@@ -90,8 +91,10 @@ err(nend) = 0;
 catches(nend) = 0;
 
 i = nstart;
+nExceptios = 0;
 while true
     if i > nend
+        i = i - 1;
         break;
     end
     try
@@ -101,7 +104,15 @@ while true
         else
             A = Problem.A;
         end
-        fprintf('i: %d size: %d\t', i, size(A,1));
+        
+        s = size(A);
+        if s(1) * s(2) < minBlockSize
+            i = i + 1;
+            nstart = i;
+            continue;
+        end
+        
+        fprintf('i: %d/%d size: %d\t', i, length(ids), size(A,1));
         tt1 = 0;
         for ii = 1:testloops
             tic;
@@ -112,16 +123,16 @@ while true
             end
         end
         tt1 = tt1 / testloops;
-        t1(i) = tt1; %#ok<SAGROW>
+        t1(i) = tt1;
         fprintf('normal: %f\t', tt1);
         
         ttbuild = 0;
-        tic
+        tic;
         s = supermatrix(A);
         clear A;
         s.fulliterate(adm, -1, minBlockSize, relativeError);
         ttbuild = toc;
-        tbuild(i) = ttbuild; %#ok<SAGROW>
+        tbuild(i) = ttbuild;
         
         tt2 = 0;
         for ii = 1:testloops
@@ -134,32 +145,36 @@ while true
         end
         clear s;
         tt2 = tt2 / testloops;
-        t2(i) = tt2; %#ok<SAGROW>
+        t2(i) = tt2;
         fprintf('Hmatrix: %f\t', tt2);
         fprintf('build time: %f\t', ttbuild);
         clear tt1 tt2 ttbuild;
         
         if showerror == 1
             if issparse(res1)
-                err(i) = norm(full(res2.getTable - res1)) / norm(full(res1)); %#ok<SAGROW>
+                err(i) = norm(full(res2.getTable - res1)) / norm(full(res1));
             else
-                err(i) = norm(res2.getTable - res1) / norm(res1); %#ok<SAGROW>
+                err(i) = norm(res2.getTable - res1) / norm(res1);
             end
             fprintf('error: %e', err(i));
             clear res1 res2;
          else
-             err(i) = 0; %#ok<SAGROW>
+             err(i) = 0;
          end
         
         fprintf('\n');
+        nExceptions = 0; % reset the exception counter.
     catch ex
         fprintf('\n!!!Exception!!!\n');
-        %break;
+        nExceptions = nExceptions + 1;
+        if nExceptions >= stopAfterNExceptions
+            i = i - nExceptions;
+            break;
+        end
     end
     i = i + 1;
 end
 
-i = i - 1;
 subplot(2,2,1);
 plot(nstart:i, t1(nstart:i),...
      nstart:i, t2(nstart:i),...
