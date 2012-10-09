@@ -130,7 +130,7 @@ while true
         tic;
         s = supermatrix(A);
         clear A;
-        s.fulliterate(adm, -1, minBlockSize, relativeError);
+        s = s.fulliterate(adm, -1, minBlockSize, relativeError);
         ttbuild = toc;
         tbuild(i) = ttbuild;
         
