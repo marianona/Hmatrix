@@ -20,7 +20,9 @@ relativeError = 0;
 S = supermatrix(full(A)); % initializes a Hmatrix tree with depth 1.
 S = S.fulliterate(adm, maxiterations, minBlockSize, relativeError); % Does the actual tree structuring.
 
-result = S.invert(); % result holds the inverse of table A.
+result = S.invert(); % result holds the inverse of table A in supermatrix form.
+result.getTable() % returns a simple matlab matrix from the supermatrix representation.
+
 ```
 
 More simple examples, can be found in main.m file.
