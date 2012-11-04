@@ -23,3 +23,5 @@ S = S.fulliterate(adm, maxiterations, minBlockSize, relativeError); % Does the a
 
 result = S.invert(); % result holds the inverse of table A.
 ```
+
+More simple examples, can be found in main.m file.
