@@ -18,10 +18,8 @@ maxiterations = -1;
 minBlockSize = 256^2;
 relativeError = 0;
 
-% initializes a Hmatrix tree with depth 1.
-S = supermatrix(full(A));
-% Does the actual tree structuring.
-S = S.fulliterate(adm, maxiterations, minBlockSize, relativeError);
+S = supermatrix(full(A)); % initializes a Hmatrix tree with depth 1.
+S = S.fulliterate(adm, maxiterations, minBlockSize, relativeError); % Does the actual tree structuring.
 
 result = S.invert(); % result holds the inverse of table A.
 ```
