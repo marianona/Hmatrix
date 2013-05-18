@@ -1,0 +1,98 @@
+<!doctype html>
+<!-- The Time Machine GitHub pages theme was designed and developed by Jon Rohan, on Feb 7, 2012. -->
+<!-- Follow him for fun. http://twitter.com/jonrohan. Tail his code on http://github.com/jonrohan -->
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <link rel="stylesheet" href="stylesheets/stylesheet.css" media="screen"/>
+  <link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script type="text/javascript" src="javascripts/script.js"></script>
+
+  <title>Hmatrix</title>
+  <meta name="description" content="Hierarchical matrices in matlab.">
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <header>
+      <h1 class="title">Hmatrix</h1>
+    </header>
+    <div id="container">
+      <p class="tagline">Hierarchical matrices in matlab.</p>
+      <div id="main" role="main">
+        <div class="download-bar">
+        <div class="inner">
+          <a href="https://github.com/marianona/Hmatrix/tarball/master" class="download-button tar"><span>Download</span></a>
+          <a href="https://github.com/marianona/Hmatrix/zipball/master" class="download-button zip"><span>Download</span></a>
+          <a href="https://github.com/marianona/Hmatrix" class="code">View Hmatrix on GitHub</a>
+        </div>
+        <span class="blc"></span><span class="trc"></span>
+        </div>
+        <article class="markdown-body">
+          <h1>Hmatrix</h1>
+
+<p>A simple library for Matlab, for experementing with Hierarchical Matrices theory.</p>
+
+<p>The implementation is based on the <a href="http://www.mis.mpg.de/de/publications/andere-reihen/ln/lecturenote-2103.html">paper</a> written by Steffen Börm, Lars Grasedyck, and Wolfgang Hackbusch.</p>
+
+<h2>Simple demonstration code:</h2>
+
+<div class="highlight"><pre><span class="n">addpath</span><span class="p">(</span><span class="s">'Hmatrix'</span><span class="p">);</span><span class="c">% This should be the path to the library.</span>
+<span class="c">% Let as is if you placed the Hmatrix folder next to your *.m files.</span>
+
+<span class="n">A</span> <span class="p">=</span> <span class="n">delsq</span><span class="p">(</span><span class="n">numgrid</span><span class="p">(</span><span class="s">'S'</span><span class="p">,</span> <span class="mi">10</span><span class="p">));</span> <span class="c">% assing YOUR table here (should show A = mytable; instead).</span>
+
+<span class="n">adm</span> <span class="p">=</span> <span class="p">@</span><span class="n">IsAdmissible</span><span class="p">;</span> <span class="c">% this points to the default admissibility condition.</span>
+<span class="n">maxiterations</span> <span class="p">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="n">minBlockSize</span> <span class="p">=</span> <span class="mi">256</span>^<span class="mi">2</span><span class="p">;</span>
+<span class="n">relativeError</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="n">S</span> <span class="p">=</span> <span class="n">supermatrix</span><span class="p">(</span><span class="n">full</span><span class="p">(</span><span class="n">A</span><span class="p">));</span> <span class="c">% initializes a Hmatrix tree with depth 1.</span>
+<span class="n">S</span> <span class="p">=</span> <span class="n">S</span><span class="p">.</span><span class="n">fulliterate</span><span class="p">(</span><span class="n">adm</span><span class="p">,</span> <span class="n">maxiterations</span><span class="p">,</span> <span class="n">minBlockSize</span><span class="p">,</span> <span class="n">relativeError</span><span class="p">);</span> <span class="c">% Does the actual tree structuring.</span>
+
+<span class="n">result</span> <span class="p">=</span> <span class="n">S</span><span class="p">.</span><span class="n">invert</span><span class="p">();</span> <span class="c">% result holds the inverse of table A in supermatrix form.</span>
+<span class="n">result</span><span class="p">.</span><span class="n">getTable</span><span class="p">()</span> <span class="c">% returns a simple matlab matrix from the supermatrix representation.</span>
+
+</pre></div>
+
+<p>More simple examples, can be found in main.m file.</p>
+        </article>
+      </div>
+    </div>
+    <footer>
+      <div class="owner">
+      <p><a href="https://github.com/marianona" class="avatar"><img src="https://secure.gravatar.com/avatar/ed78b9a14724db46c3831432e42813c6?s=30&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" width="48" height="48"/></a> <a href="https://github.com/marianona">marianona</a> maintains <a href="https://github.com/marianona/Hmatrix">Hmatrix</a></p>
+
+
+      </div>
+      <div class="creds">
+        <small>This page generated using <a href="https://pages.github.com/">GitHub Pages</a><br/>theme by <a href="http://twitter.com/jonrohan/">Jon Rohan</a></small>
+      </div>
+    </footer>
+  </div>
+  <div class="current-section">
+    <a href="#top">Scroll to top</a>
+    <a href="https://github.com/marianona/Hmatrix/tarball/master" class="tar">tar</a><a href="https://github.com/marianona/Hmatrix/zipball/master" class="zip">zip</a><a href="" class="code">source code</a>
+    <p class="name"></p>
+  </div>
+
+            <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-41036961-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+</body>
+</html>
