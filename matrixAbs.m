@@ -1,7 +1,7 @@
 classdef matrixAbs
     %MATRIXABS An abstract base class for rk- full- and supermatrices
     
-    properties (Abstract)
+    properties
         rows
         cols
     end

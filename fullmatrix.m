@@ -2,8 +2,6 @@ classdef fullmatrix < matrixAbs
     %Representation of inadmissible nodes
     
     properties
-        rows
-        cols
         e
     end
     

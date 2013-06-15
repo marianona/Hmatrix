@@ -2,8 +2,6 @@ classdef supermatrix < matrixAbs
     %Representation of Hmatrix tree nodes
     
     properties
-        rows
-        cols
         block_rows
         block_cols
         r%rkmatrix - admissible

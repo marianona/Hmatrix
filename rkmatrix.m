@@ -2,8 +2,6 @@ classdef rkmatrix < matrixAbs
     %Representation of admissible nodes
     
     properties
-        rows
-        cols
         k
         kt
         tc
