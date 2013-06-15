@@ -1,11 +1,12 @@
-classdef rkmatrix
-    %admissible nodes
+classdef rkmatrix < matrixAbs
+    %Representation of admissible nodes
+    
     properties
+        rows
+        cols
         k
         kt
         tc
-        rows
-        cols
         a
         b
     end
@@ -87,19 +88,10 @@ classdef rkmatrix
         end
         
         %******************************************************************
-        %****************************utilities*****************************
+        %***************************base methods***************************
         %******************************************************************
         function table = getTable(RK)
             table = RK.a * RK.b';
-        end
-        
-        function [ret1, ret2] = getsize(RK)
-            if nargout == 2
-                ret1 = RK.rows;
-                ret2 = RK.cols;
-            else
-                ret1 = [RK.rows RK.cols];
-            end
         end
         
         function SM = getsupermatrix(RK)

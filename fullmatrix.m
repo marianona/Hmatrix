@@ -1,8 +1,9 @@
-classdef fullmatrix
-    %inadmissible nodes
+classdef fullmatrix < matrixAbs
+    %Representation of inadmissible nodes
+    
     properties
-        cols
         rows
+        cols
         e
     end
     
@@ -19,23 +20,14 @@ classdef fullmatrix
         
         
         %******************************************************************
-        %****************************utilities*****************************
+        %***************************base methods***************************
         %******************************************************************
         function table = getTable(FM)
             table = FM.e;
         end
         
-        function [ret1, ret2] = getsize(FM)
-            if nargout == 2
-                ret1 = FM.rows;
-                ret2 = FM.cols;
-            else
-                ret1 = [FM.rows FM.cols];
-            end
-        end
-        
         function SM = getsupermatrix(FM)
-            SM =  supermatrix();
+            SM = supermatrix();
             [SM.rows SM.cols] = FM.getsize();
             SM.f = FM;
         end

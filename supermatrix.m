@@ -1,4 +1,6 @@
-classdef supermatrix
+classdef supermatrix < matrixAbs
+    %Representation of Hmatrix tree nodes
+    
     properties
         rows
         cols
@@ -127,7 +129,7 @@ classdef supermatrix
         end
         
         %******************************************************************
-        %****************************utilities*****************************
+        %***************************base methods***************************
         %******************************************************************
         function table = getTable(SM)
             if isa(SM.r, 'rkmatrix')
@@ -142,18 +144,12 @@ classdef supermatrix
             end
         end
         
-        function [ret1, ret2] = getsize(SM)
-            if nargout == 2
-                ret1 = SM.rows;
-                ret2 = SM.cols;
-            else
-                ret1 = [SM.rows SM.cols];
-            end
-        end
-        
         function SM = getsupermatrix(SM)
         end
         
+        %******************************************************************
+        %***************************type checks****************************
+        %******************************************************************
         function ret = hasR(SM)
             ret = isa(SM.r, 'rkmatrix');
         end
